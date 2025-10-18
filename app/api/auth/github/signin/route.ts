@@ -32,10 +32,10 @@ export async function GET(req: NextRequest): Promise<Response> {
   ]) {
     store.set(key, value, {
       path: '/',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true, // Required for SameSite=None
       httpOnly: true,
       maxAge: 60 * 10, // 10 minutes
-      sameSite: 'lax',
+      sameSite: 'none', // Allow cross-site cookies for OAuth redirect from GitHub
     })
   }
 
@@ -81,10 +81,10 @@ export async function POST(req: NextRequest): Promise<Response> {
   ]) {
     store.set(key, value, {
       path: '/',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true, // Required for SameSite=None
       httpOnly: true,
       maxAge: 60 * 10, // 10 minutes
-      sameSite: 'lax',
+      sameSite: 'none', // Allow cross-site cookies for OAuth redirect from GitHub
     })
   }
 
