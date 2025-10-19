@@ -62,7 +62,8 @@ export async function createSandbox(config: SandboxConfig, logger: TaskLogger): 
 
     // Use the specified timeout (maxDuration) for sandbox lifetime
     // keepAlive only controls whether we shutdown after task completion
-    const timeoutMs = config.timeout ? parseInt(config.timeout.replace(/\D/g, '')) * 60 * 1000 : 60 * 60 * 1000 // Default 1 hour
+    // Hobby plan max: 45 minutes, Pro/Enterprise max: 5 hours
+    const timeoutMs = config.timeout ? parseInt(config.timeout.replace(/\D/g, '')) * 60 * 1000 : 40 * 60 * 1000 // Default 40 minutes (safe for Hobby plan)
 
     // Create sandbox with proper source configuration
     const sandboxConfig = {
